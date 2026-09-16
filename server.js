@@ -22,6 +22,10 @@ app.get('/about', (req, res) => {
     res.send('<h1>About Us</h1><p>This is the About page.</p>');
 });
 
+app.get('/favicon.ico', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'favicon.ico'));
+});
+
 // Rooms
 app.get('/api/rooms', (req, res) => {
     console.log('Time is: ', Date.now());
