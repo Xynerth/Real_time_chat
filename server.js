@@ -3,6 +3,8 @@ const path = require('path');
 const app = express();
 const PORT = 4000;
 
+const { Server } = require("socket.io");
+
 var rooms = [];
 var numRooms = 0;
 
@@ -20,10 +22,6 @@ app.get('/contact', (req, res) => {
 
 app.get('/about', (req, res) => {
     res.send('<h1>About Us</h1><p>This is the About page.</p>');
-});
-
-app.get('/favicon.ico', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'favicon.ico'));
 });
 
 // Rooms
