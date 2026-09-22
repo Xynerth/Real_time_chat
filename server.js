@@ -3,7 +3,23 @@ const path = require('path');
 const app = express();
 const PORT = 4000;
 
+
+// From Socket.io tutorial
 const { Server } = require("socket.io");
+const { createServer } = require('node:http');
+
+const server = createServer(app);
+const io = new Server(server);
+
+io.on('connection', (socket) => {
+    console.log('a user connected');
+    socket.on('disconnect', () => {
+        console.log('user disconnected');
+    });
+});
+
+// End from Socket.io
+
 
 var rooms = [];
 var numRooms = 0;
@@ -15,6 +31,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.get('/', (req, res) => {
     res.send('<h1>Welcome to the Home Page!</h1>');
 });
+
+
 
 app.get('/contact', (req, res) => {
     res.send('<h1>Contact Us</h1><p>Feel free to reach out!</p>');
@@ -74,6 +92,6 @@ app.post('/api/rooms', (req, res) => {
 });
 
 //Start server
-app.listen(PORT, () => {
+server.listen(PORT, () => {
     console.log(`Server is listening at http://localhost:${PORT}`);
 });

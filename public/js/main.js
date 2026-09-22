@@ -42,5 +42,5 @@ document.getElementById('new-room-form').addEventListener('submit', async (e) =>
 });
 
 loadRooms();
-
+const socket = io();
 
