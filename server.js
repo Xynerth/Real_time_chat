@@ -16,6 +16,9 @@ io.on('connection', (socket) => {
     socket.on('disconnect', () => {
         console.log('user disconnected');
     });
+    socket.on('chat message', (msg) => {
+        io.emit('chat message', msg);
+    });
 });
 
 // End from Socket.io
@@ -40,6 +43,10 @@ app.get('/contact', (req, res) => {
 
 app.get('/about', (req, res) => {
     res.send('<h1>About Us</h1><p>This is the About page.</p>');
+});
+
+app.get('/api/testRoom', (req, res) => {
+    res.sendFile(path.join(__dirname, '/public/room.html'));
 });
 
 // Rooms
